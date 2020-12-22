@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Javascriptový snejk</title>
+    <title>Javascript Snake Game</title>
     <style>
       body {
         background-color: #ffbf00;
@@ -26,11 +26,24 @@
       let snakePosX = 0;
       let snakePosY = canvas.height / 2 - snakeSize / 2;
 
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // loop
+      function gameLoop() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "black";
-      ctx.fillRect(snakePosX, snakePosY, snakeSize, snakeSize);
+        // basic movement on x-axis
+        snakePosX += 1;
+
+        // checking basic collision with wall
+        if (snakePosX > canvas.width) {
+          snakePosX = 0;
+        }
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(snakePosX, snakePosY, snakeSize, snakeSize);
+        requestAnimationFrame(gameLoop);
+      }
+      gameLoop();
     </script>
   </body>
 </html>
