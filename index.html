@@ -23,26 +23,40 @@
 
       // player
       const snakeSize = 50;
+      let snakeSpeed = 5;
       let snakePosX = 0;
       let snakePosY = canvas.height / 2 - snakeSize / 2;
 
-      // loop
-      function gameLoop() {
-        ctx.fillStyle = "white";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // draw rectangle
+      function rectangle(color, x, y, width, height) {
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, width, height);
+      }
 
+      // movement
+      function moveStuff() {
         // basic movement on x-axis
-        snakePosX += 1;
+        snakePosX += snakeSpeed;
 
         // checking basic collision with wall
         if (snakePosX > canvas.width) {
           snakePosX = 0;
         }
+      }
 
-        ctx.fillStyle = "black";
-        ctx.fillRect(snakePosX, snakePosY, snakeSize, snakeSize);
+      // drawing
+      function drawStuff() {
+        rectangle("white", 0, 0, canvas.width, canvas.height);
+        rectangle("black", snakePosX, snakePosY, snakeSize, snakeSize);
+      }
+
+      // game loop
+      function gameLoop() {
+        drawStuff();
+        moveStuff();
         requestAnimationFrame(gameLoop);
       }
+
       gameLoop();
     </script>
   </body>
