@@ -99,7 +99,9 @@
       function gameLoop() {
         drawStuff();
         moveStuff();
-        requestAnimationFrame(gameLoop);
+
+        // setting FPS
+        setTimeout(gameLoop, 1000 / 15);
       }
 
       gameLoop();
