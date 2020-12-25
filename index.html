@@ -11,10 +11,17 @@
       canvas {
         border: 10px solid #f7347a;
       }
+
+      h1 {
+        font-size: 4em;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
     <canvas width="600" height="600"></canvas>
+    <h1>0</h1>
     <script>
       // listeners
       document.addEventListener("keydown", keyPush);
@@ -22,6 +29,9 @@
       // canvas
       const canvas = document.querySelector("canvas");
       const ctx = canvas.getContext("2d");
+
+      // h1
+      const scoreBoard = document.querySelector("h1");
 
       // player
       const snakeSize = 50;
@@ -32,8 +42,11 @@
       let velocityX = 0;
       let velocityY = 0;
 
+      // game
       const tileCountX = canvas.width / snakeSize;
       const tileCountY = canvas.height / snakeSize;
+
+      let score = 0;
 
       // food
       let foodPosX;
@@ -82,6 +95,9 @@
 
         // food collision
         if (snakePosX == foodPosX && snakePosY == foodPosY) {
+          // add +1 to score
+          scoreBoard.textContent = ++score;
+
           // random food position
           resetFood();
         }
@@ -99,7 +115,7 @@
         rectangle("black", snakePosX, snakePosY, snakeSize, snakeSize);
 
         // food
-        rectangle("skyblue", foodPosX, foodPosY, snakeSize, snakeSize);
+        rectangle("skyblue", foodPosX, foodPosY, snakeSize - 1, snakeSize - 1);
       }
 
       // randomize food position
