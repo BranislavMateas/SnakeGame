@@ -7,6 +7,7 @@
       body {
         background-color: #ffbf00;
         text-align: center;
+        overflow-y: hidden;
       }
       canvas {
         border: 10px solid #f7347a;
@@ -16,6 +17,8 @@
         font-size: 4em;
         font-family: Arial, Helvetica, sans-serif;
         margin-top: 10px;
+        font-weight: bold;
+        letter-spacing: 0px;
       }
     </style>
   </head>
@@ -45,6 +48,7 @@
       // game
       const tileCountX = canvas.width / snakeSize;
       const tileCountY = canvas.height / snakeSize;
+      const FPS = 15;
 
       let score = 0;
 
@@ -160,7 +164,7 @@
         moveStuff();
 
         // setting FPS
-        setTimeout(gameLoop, 1000 / 15);
+        setTimeout(gameLoop, 1000 / FPS);
       }
       resetFood();
       gameLoop();
