@@ -35,6 +35,10 @@
       const tileCountX = canvas.width / snakeSize;
       const tileCountY = canvas.height / snakeSize;
 
+      // food
+      let foodPosX = 400;
+      let foodPosY = 100;
+
       // draw rectangle
       function rectangle(color, x, y, width, height) {
         ctx.fillStyle = color;
@@ -75,6 +79,14 @@
         if (snakePosY < 0) {
           snakePosY = canvas.height;
         }
+
+        // food collision
+        if (snakePosX == foodPosX && snakePosY == foodPosY) {
+          /*
+          DO SOMETHING, for example:
+          */
+          alert("gotcha!");
+        }
       }
 
       // drawing
@@ -87,6 +99,9 @@
 
         // snake
         rectangle("black", snakePosX, snakePosY, snakeSize, snakeSize);
+
+        // food
+        rectangle("skyblue", foodPosX, foodPosY, snakeSize, snakeSize);
       }
 
       // controls
