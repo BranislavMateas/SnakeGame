@@ -36,8 +36,8 @@
       const tileCountY = canvas.height / snakeSize;
 
       // food
-      let foodPosX = 400;
-      let foodPosY = 100;
+      let foodPosX;
+      let foodPosY;
 
       // draw rectangle
       function rectangle(color, x, y, width, height) {
@@ -82,10 +82,8 @@
 
         // food collision
         if (snakePosX == foodPosX && snakePosY == foodPosY) {
-          /*
-          DO SOMETHING, for example:
-          */
-          alert("gotcha!");
+          // random food position
+          resetFood();
         }
       }
 
@@ -102,6 +100,12 @@
 
         // food
         rectangle("skyblue", foodPosX, foodPosY, snakeSize, snakeSize);
+      }
+
+      // randomize food position
+      function resetFood() {
+        foodPosX = Math.floor(Math.random() * tileCountX) * snakeSize;
+        foodPosY = Math.floor(Math.random() * tileCountY) * snakeSize;
       }
 
       // controls
@@ -142,7 +146,7 @@
         // setting FPS
         setTimeout(gameLoop, 1000 / 15);
       }
-
+      resetFood();
       gameLoop();
     </script>
   </body>
