@@ -36,21 +36,24 @@
       // h1
       const scoreBoard = document.querySelector("h1");
 
+      // game
+      const tileSize = 50;
+      const tileCountX = canvas.width / tileSize;
+      const tileCountY = canvas.height / tileSize;
+      const FPS = 15;
+
+      let score = 0;
+
       // player
-      const snakeSize = 50;
-      let snakeSpeed = snakeSize;
+      let snakeSpeed = tileSize;
       let snakePosX = 0;
       let snakePosY = canvas.height / 2;
 
       let velocityX = 0;
       let velocityY = 0;
 
-      // game
-      const tileCountX = canvas.width / snakeSize;
-      const tileCountY = canvas.height / snakeSize;
-      const FPS = 15;
-
-      let score = 0;
+      let tail = [];
+      let snakeLength = 1;
 
       // food
       let foodPosX;
@@ -68,10 +71,10 @@
           for (let j = 0; j < tileCountY; j++) {
             rectangle(
               "#fff",
-              snakeSize * i,
-              snakeSize * j,
-              snakeSize - 1,
-              snakeSize - 1
+              tileSize * i,
+              tileSize * j,
+              tileSize - 1,
+              tileSize - 1
             );
           }
         }
@@ -84,23 +87,29 @@
         snakePosY += snakeSpeed * velocityY;
 
         // collisions with wall
-        if (snakePosX > canvas.width - snakeSize) {
+        if (snakePosX > canvas.width - tileSize) {
           snakePosX = 0;
         }
         if (snakePosX < 0) {
           snakePosX = canvas.width;
         }
-        if (snakePosY > canvas.height - snakeSize) {
+        if (snakePosY > canvas.height - tileSize) {
           snakePosY = 0;
         }
         if (snakePosY < 0) {
           snakePosY = canvas.height;
         }
 
+        // tail
+        tail.push({ x: snakePosX, y: snakePosY });
+
         // food collision
         if (snakePosX == foodPosX && snakePosY == foodPosY) {
           // add +1 to score
           scoreBoard.textContent = ++score;
+
+          // adding +1 to snake´s length
+          snakeLength++;
 
           // random food position
           resetFood();
@@ -115,17 +124,25 @@
         // grid
         drawGrid();
 
+        // tail
+        tail.forEach((snakePart) =>
+          rectangle("grey", snakePart.x, snakePart.y, tileSize, tileSize)
+        );
+
+        // remove the oldest elements in the array
+        tail = tail.slice(-1 * snakeLength);
+
         // snake
-        rectangle("black", snakePosX, snakePosY, snakeSize, snakeSize);
+        rectangle("black", snakePosX, snakePosY, tileSize, tileSize);
 
         // food
-        rectangle("skyblue", foodPosX, foodPosY, snakeSize - 1, snakeSize - 1);
+        rectangle("skyblue", foodPosX, foodPosY, tileSize - 1, tileSize - 1);
       }
 
       // randomize food position
       function resetFood() {
-        foodPosX = Math.floor(Math.random() * tileCountX) * snakeSize;
-        foodPosY = Math.floor(Math.random() * tileCountY) * snakeSize;
+        foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
+        foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
       }
 
       // controls
