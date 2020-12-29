@@ -101,8 +101,18 @@
         isRunning = false;
       }
 
+      function gameWon() {
+        scoreBoard.innerHTML = `🎉 <strong> YOU WON! </strong> 🎉`;
+        isRunning = false;
+      }
+
       // randomize food position
       function resetFood() {
+        // nowhere to go
+        if (snakeLength == tileCountX * tileCountY) {
+          gameWon();
+        }
+
         foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
         foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
 
