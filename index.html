@@ -105,6 +105,20 @@
       function resetFood() {
         foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
         foodPosY = Math.floor(Math.random() * tileCountY) * tileSize;
+
+        // won´t spawn food on our head
+        if (snakePosX === foodPosX && snakePosY === foodPosY) {
+          resetFood();
+        }
+
+        // won´t´spawn food on our body
+        if (
+          tail.some(
+            (snakePart) => snakePart.x === foodPosX && snakePart.y === foodPosY
+          )
+        ) {
+          resetFood();
+        }
       }
 
       // movement
