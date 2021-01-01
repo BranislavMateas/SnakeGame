@@ -1,0 +1,16 @@
+body {
+  background-color: #ffbf00;
+  text-align: center;
+  overflow-y: hidden;
+}
+canvas {
+  border: 10px solid #f7347a;
+}
+
+h1 {
+  font-size: 4em;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 10px;
+  font-weight: bold;
+  letter-spacing: 0px;
+}
