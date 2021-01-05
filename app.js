@@ -33,6 +33,11 @@ let snakeLength = 2;
 let foodPosX = 0;
 let foodPosY = 0;
 
+// sound
+let audioAfterFood = new Audio("./GotAnotherFood.wav");
+let audioYouLost = new Audio("./Lost.ogg");
+let audioYouWon = new Audio("./Win.ogg");
+
 // game loop
 function gameLoop() {
   if (isRunning) {
@@ -65,11 +70,17 @@ function drawGrid() {
 function gameOver() {
   scoreBoard.innerHTML = `☠️ <strong> ${score} </strong> ☠️`;
   isRunning = false;
+
+  //audio
+  audioYouLost.play();
 }
 
 function gameWon() {
   scoreBoard.innerHTML = `🎉 <strong> YOU WON! </strong> 🎉`;
   isRunning = false;
+
+  // audio
+  audioYouWon.play();
 }
 
 // randomize food position
@@ -77,6 +88,11 @@ function resetFood() {
   // nowhere to go
   if (snakeLength == tileCountX * tileCountY) {
     gameWon();
+  }
+
+  //audio
+  if (score != 0) {
+    audioAfterFood.play();
   }
 
   foodPosX = Math.floor(Math.random() * tileCountX) * tileSize;
