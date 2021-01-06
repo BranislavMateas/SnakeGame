@@ -34,9 +34,9 @@ let foodPosX = 0;
 let foodPosY = 0;
 
 // sound
-let audioAfterFood = new Audio("./GotAnotherFood.wav");
-let audioYouLost = new Audio("./Lost.ogg");
-let audioYouWon = new Audio("./Win.ogg");
+let audioAfterFood = new Audio("./sounds/GotAnotherFood.wav");
+let audioYouLost = new Audio("./sounds/Lost.ogg");
+let audioYouWon = new Audio("./sounds/Win.ogg");
 
 // game loop
 function gameLoop() {
