@@ -3,4 +3,5 @@ As Title suggest, this is a snake game - inspired by old Nokia phones and tutori
 
 Currently planning to make it mobile-friendly, make some improvments to our snake, making its speed bigger and so and so on...
 
-### See ya!
+### See ya! 
+https://branislavmateas.github.io/SnakeGame/
